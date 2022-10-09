@@ -1,3 +1,3 @@
- {"contact":[{"Email":"test@email.com","First Name":"Test","Last Name":"Name","Phone Number":"123654987"}]}
-{"contact":[{"Email":"this@email.com","First Name":"Test2","Last Name":"Name2","Phone Number":"987654123"}]}
-{"contact":[{"Email":"another@email.com","First Name":"Test3","Last Name":"Name3","Phone Number":"321654987"}]}
+
+{"123456789":{"Email":"my@email.com","First Name":"Blake","Last Name":"McCann","Phone Number":"123456789"}}
+{"321654987":{"Email":"her@email.com","First Name":"Kelsey","Last Name":"McCann","Phone Number":"321654987"}}

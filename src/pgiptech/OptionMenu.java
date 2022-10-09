@@ -13,7 +13,7 @@ public class OptionMenu {
 			System.out.println("***Please choose from the following options:***");
 			System.out.println("Option 1 : Add a new contact");
 			System.out.println("Option 2 : Edit an existing contact");
-			System.out.println("Option 3 : View contacts");
+			System.out.println("Option 3 : View all contacts");
 			System.out.println("Option 4 : Delete contacts");
 			System.out.println("Please enter a number between 1 and 4");
 			
@@ -22,7 +22,7 @@ public class OptionMenu {
 				System.out.println("***Please choose from the following options:***");
 				System.out.println("Option 1 : Add a new contact");
 				System.out.println("Option 2 : Edit an existing contact");
-				System.out.println("Option 3 : View contacts");
+				System.out.println("Option 3 : View all contacts");
 				System.out.println("Option 4 : Delete contacts");
 				System.out.println("Please enter a number between 1 and 4");
 			}
@@ -38,7 +38,7 @@ public class OptionMenu {
 			}
 			else if(selection == 2) {
 				System.out.println("Option 2");
-				//call EditContact method
+				SearchContacts.searchContacts();
 			}
 			else if(selection == 3) {
 				System.out.println("Option 3");

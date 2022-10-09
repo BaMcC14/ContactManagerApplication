@@ -1,89 +1,64 @@
 package pgiptech;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 import org.json.simple.parser.ParseException;
 
 public class ViewAllContacts{
 	
 	public static void viewAll() throws IOException, ParseException {
 		
-		System.out.println("Your Contact List:");
+		System.out.println("Your Contact List:\n");
 		
-		JSONParser jsonparser = new JSONParser();
-			
-				
+		
+		String connectionString = 
+				"jdbc:sqlserver://DESKTOP-7JNHD5O:1433;Database=ContactManagerApp;trustServerCertificate=true;IntegratedSecurity=true";
+		
+		Connection conn = null;
+		Statement stmt = null;
+		
 		try {
-			System.out.println("Start");
+			conn = DriverManager.getConnection(connectionString);
+			stmt = conn.createStatement();	
+				
+			String sql = "SELECT FirstName, LastName, PhoneNumber, Email FROM ContactTable ORDER BY FirstName;";
+			stmt.execute(sql);
 			
-			FileReader reader = new FileReader(".\\src\\info.json");
-			System.out.println("File Found");
+			ResultSet rs = stmt.executeQuery(sql);
 			
+			while(rs.next()) {
+				String fName = rs.getString("FirstName");
+				String lName = rs.getString("LastName");
+				String phoneNumber = rs.getString("PhoneNumber");
+				String email = rs.getString("Email");
+				System.out.println(fName +" "+ lName +" "+ phoneNumber +" "+ email);
+			}
+			System.out.println("\n\n");
+			OptionMenu.optionMenu();
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}catch(Exception e) {
+			e.printStackTrace();		
+		}finally {
+			try {
+				if(stmt != null) 
+					conn.close();
+				}catch(SQLException es) {
 					
-			Object obj = jsonparser.parse(reader);
-			System.out.println("Parse obj");
-			
-						
-			JSONObject jsonObject = (JSONObject) obj;
-			System.out.println("Create JSONObject");
-			
-			
-						
-			//JSONArray contactArray = (JSONArray)jsonObject.get("1");
-			
-//			for(int i = 0; i < contactArray.size(); i++) {
-//				JSONObject myContact = (JSONObject) contactArray.get(i);
-//				//System.out.println(i);				
-//				String email = (String) myContact.get("Email");
-//				String fName = (String) myContact.get("First Name");
-//				String lName = (String) myContact.get("Last Name");
-//				String pNumber = (String) myContact.get("Phone Number");
-//				System.out.println(fName);
-//				System.out.println(lName);
-//				System.out.println(pNumber);
-//				System.out.println(email);
-//				}
-//			
-//			jsonObject.get("contact");
-//			
-
-		}catch (FileNotFoundException e) {
-			e.printStackTrace();
+				}		
+			try {
+				if(conn != null)
+					conn.close();
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}
+			}
 		}
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//			File file = new File("src/pgiptech/info.json");
-//			Scanner scanner = new Scanner(file);
-//			String info = "";
-//			while(scanner.hasNext()) {
-//			info = scanner.nextLine();
-//			System.out.println(info);
-//			}
-//			scanner.close();
-	}
 }
+		
+		
